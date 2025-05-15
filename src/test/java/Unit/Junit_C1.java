@@ -42,5 +42,6 @@ public class Junit_C1 {
         String pageSource = driver.getPageSource();
         //System.out.println("pageSource = " + pageSource);
         Thread.sleep(1000);
+        System.out.println("Hi");
     }
 }
