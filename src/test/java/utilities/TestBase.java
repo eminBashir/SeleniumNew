@@ -13,7 +13,7 @@ import java.util.*;
 public abstract class TestBase {
 
     protected static WebDriver driver;
-
+    protected static Actions action;
 
     @Before
     public void setup() {
@@ -43,7 +43,7 @@ public abstract class TestBase {
 
     }
 
-    public static void scrollToElementWithActions(WebElement element,WebDriver driver){
+    public static void scrollToElementWithActions(WebElement element, WebDriver driver) {
         Actions actions = new Actions(driver);
         actions.scrollToElement(element).perform();
     }

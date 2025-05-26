@@ -17,8 +17,8 @@ public class JUnit_Actions_Test extends TestBase {
 
     @Test
     public void action() {
-        Actions action = new Actions(driver);
 
+        // Actions action = new Actions(driver);
         //Istifadechi "https://migros.com.tr/" saytina daxil olmalidir
         driver.get("https://migros.com.tr/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
@@ -48,7 +48,7 @@ public class JUnit_Actions_Test extends TestBase {
 
         //istifadeci "SearchBox"-u gore bilmelidir
         WebElement searchBox = driver.findElement(By.id("product-search-combobox--trigger"));
-        scrollToElementWithActions(searchBox,driver);
+        scrollToElementWithActions(searchBox, driver);
         assertTrue(searchBox.isDisplayed());
         wait(2);
 
@@ -73,5 +73,56 @@ public class JUnit_Actions_Test extends TestBase {
 
         assertTrue(actualText.contains(expectedText1) && actualText.contains(expectedText2));
 
+    }
+
+    @Test
+    public void contextClick() {
+
+        //istifadeci "https://the-internet.herokuapp.com/context_menu" sehifesine daxil olmalidir
+        driver.get("https://the-internet.herokuapp.com/context_menu");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        action = new Actions(driver);
+
+        //istifadeci sehifedeki qutuya sag klik etmelidir
+        WebElement box = driver.findElement(By.id("hot-spot"));
+        action.contextClick(box).perform();
+        wait(2);
+
+        //istifadeci acilan alert penceresini baglamalidi
+        driver.switchTo().alert().accept();
+
+    }
+
+    @Test
+    public void moveToElement() {
+
+        action = new Actions(driver);
+
+        //istifadeci "https://migros.com.tr/" saytina daxil olmalidir.
+        driver.get("https://migros.com.tr/");
+
+        //istifadeci saytdaki "Kategoriyalar" bolmesinin ustunde gozlemelidi
+        WebElement categories = driver.findElement(By.cssSelector("div[class='categories-icon']"));
+        action.moveToElement(categories).perform();
+        wait(2);
+    }
+
+    @Test
+    public void dragDrop() {
+        action = new Actions(driver);
+        //istifadeci "https://jqueryui.com/droppable/" saytina daxil olmalidir
+        driver.get("https://jqueryui.com/droppable/");
+
+        //istifadeci drag-i dropp-un uzerine aparmalidi
+        driver.switchTo().frame(0); //frame aliriq
+
+        //frame almagin diger yolu
+//        WebElement frame = driver.findElement(By.cssSelector("iframe[class='demo-frame']"));
+//        driver.switchTo().frame(frame);
+
+        WebElement drag = driver.findElement(By.id("draggable"));
+        WebElement drop = driver.findElement(By.id("droppable"));
+
+        action.dragAndDrop(drag, drop).perform();
     }
 }
