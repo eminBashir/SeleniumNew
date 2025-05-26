@@ -12,7 +12,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
-public class Junit_C1 {
+public class Junit_C1Test {
     String url = "https://the-internet.herokuapp.com/";
     WebDriver driver;
 
